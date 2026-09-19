@@ -1,8 +1,32 @@
 import numpy as np
 
-def calculate(list):
 
+def calculate(lst: list[int]) -> dict[str,list[int|float]] :
 
+    '''
+    This will calculate the numpy 3x3 array of mean,variance,standard deviation,maximum,minimum,sum for x-axis,y-axis,whole array.
 
+    numpy arry into list -->  .tolist()
+    numpy array float value into standard python datatype --> .item()
+    
 
-    return calculations
+    mean() --> will calculate the mean.
+    std() --> will calculate the population standard deviation.
+    var() --> will calculate the population variance.
+    max(),min(),sum() --> will calculate the maximum,minimum,total value.    
+    '''
+    
+    if len(lst) != 9:
+        raise ValueError('List must contain nine numbers.')
+
+    arr = np.array(lst).reshape((3,3))
+
+    dictionary = {'mean':[arr.mean(axis=0).tolist(),arr.mean(axis=1).tolist(),arr.mean().item()],
+                  'variance':[arr.var(axis=0).tolist(),arr.var(axis=1).tolist(),arr.var().item()],
+                  'standard deviation': [arr.std(axis=0).tolist(),arr.std(axis=1).tolist(),arr.std().item()],
+                  'max': [arr.max(axis=0).tolist(),arr.max(axis=1).tolist(),arr.max().item()],
+                  'min': [arr.min(axis=0).tolist(),arr.min(axis=1).tolist(),arr.min().item()],
+                  'sum': [arr.sum(axis=0).tolist(),arr.sum(axis=1).tolist(),arr.sum().item()]}
+
+    return dictionary
+
